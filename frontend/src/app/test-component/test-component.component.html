@@ -1,0 +1,54 @@
+<div class="login-wrap">
+  <div class="login-html">
+    <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
+    <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+    <div class="login-form">
+      <div class="sign-in-htm">
+        <span *ngIf="invalid" style="color: white">Invalid Credentials!</span>
+        <div class="group">
+          <label for="user" class="label">Username</label>
+          <input id="user" type="text" class="input" [(ngModel)]="loginemail">
+        </div>
+        <div class="group">
+          <label for="pass" class="label">Password</label>
+          <input id="pass" type="password" class="input" data-type="password" [(ngModel)]="loginpass">
+        </div>
+        <div class="group">
+          <input id="check" type="checkbox" class="check" checked>
+          <label for="check"><span class="icon"></span> Keep me Signed in</label>
+        </div>
+        <div class="group">
+          <input type="submit" (click)="login()" class="button" value="Sign In">
+        </div>
+        <div class="hr"></div>
+      </div>
+
+
+      <div class="sign-up-htm">
+        <div class="group">
+          <label for="name" class="label">Name</label>
+          <input id="name" type="text" class="input" [(ngModel)]="name">
+        </div>
+        <div class="group">
+          <label for="email" class="label">Email</label>
+          <input id="email" type="text" class="input" [(ngModel)]="email">
+        </div>
+        <div class="group">
+          <label for="password" class="label">Password</label>
+          <input id="password" type="text" class="input" [(ngModel)]="password">
+        </div>
+        <div class="group">
+          <label for="college" class="label">College</label>
+          <input id="college" type="text" class="input" [(ngModel)]="college">
+        </div>
+        <div class="group">
+          <label for="phone" class="label">Phone</label>
+          <input id="phone" type="text" class="input" [(ngModel)]="phone">
+        </div>
+        <div class="group" id="submitbtn">
+          <input type="submit" (click)="signup()" class="button" value="Sign Up">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

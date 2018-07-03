@@ -1,0 +1,68 @@
+
+<!------ Include the above in your HEAD tag ---------->
+
+<!-- Team -->
+<section id="team" class="pb-5">
+  <div class="container">
+    <div class="row">
+      <!-- Team member -->
+      <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let item of items">
+        <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+          <div class="mainflip">
+            <div class="frontside">
+              <div class="card">
+                <div class="card-body text-center">
+                  <p><img class="img-fluid" src="{{ item.imgUrl }}" alt="card image"></p>
+                  <h4 class="card-title">{{ item.bookName }}</h4>
+                  <p class="card-text">Price - Rs.{{ item.price }}</p>
+                  <a class="btn btn-primary btn-sm" id="{{ item.id }}" (click)="addToWishlist($event)"><i class="fa fa-plus"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="backside">
+              <div class="card">
+                <div class="card-body text-center mt-4">
+                  <h4 class="card-title">{{ item.bookName }}</h4>
+                  <p class="card-text" align="left" style="margin-left: 4rem; margin-top: 2rem;">
+                    <span><strong>Author:</strong> {{ item.authorName }} </span><br>
+                    <span><strong>Price:</strong> {{ item.price}}</span><br>
+                    <span><strong>Condition:</strong> {{ item.condition }}</span><br>
+                  </p>
+                  <ul class="list-inline" style="margin-top: 4rem;">
+                    <li class="list-inline-item">
+                      <button class="btn btn-primary" id="{{ item.id }}" (click)="showDetail($event)">View Details</button>
+                    </li>
+                    <li class="list-inline-item">
+                      <button class="btn btn-primary" id="{{ item.id }}" (click)="addToWishlist($event)">Add to Wishlist</button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Team -->
+
+
+
+<!--<div class="container">-->
+    <!--<div class="row row-offcanvas row-offcanvas-right">-->
+      <!--<div *ngFor="let item of items ; let i = index">-->
+        <!--<div class="card" style="width: 18rem;margin: 2rem;">-->
+          <!--<img class="card-img-top" src="{{ item.imgUrl }}" style="width: 286px;height: 210px;" alt="Card image cap">-->
+          <!--<div class="card-body">-->
+            <!--<h5 class="card-title">Book - {{ item.bookName }}</h5>-->
+            <!--<span>Author - {{ item.authorName }}</span><br>-->
+            <!--<span>Condition - {{ item.condition }}</span><br>-->
+            <!--<span>Price - {{ item.price }}</span><br>-->
+            <!--<button id="{{ item.id }}" (click)="showDetail($event)" class="btn btn-primary">View Details</button>-->
+            <!--<button id="{{ item.id }}" (click)="addToWishlist($event)" class="btn btn-primary">Add to Wishlist</button>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
