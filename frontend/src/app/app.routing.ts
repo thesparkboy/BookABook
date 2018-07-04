@@ -19,7 +19,7 @@ const appRoutes: Routes = [
   { path: 'listings/add', component: NewListingComponent, canActivate: [AuthGuard]},
   { path: 'listings/:id', component: ListingComponent, canActivate: [AuthGuard]},
   { path: 'wishlist', component: WishlistComponent, canActivate: [AuthGuard]},
-  { path:'test', component: TestComponentComponent},
+  { path: 'test', component: TestComponentComponent},
   { path: '**', redirectTo: '/login' }
 ];
 

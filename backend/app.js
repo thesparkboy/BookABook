@@ -55,7 +55,7 @@ app.post('/upload', (req, res) => {
 })
 
 app.post('/listings/add', (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     Listings.create({
         id: req.body.id,
         seller: req.body.seller,

@@ -20,6 +20,7 @@ import { FileUploadService } from "./_services/file-upload.service";
 import { TestComponentComponent } from './test-component/test-component.component';
 import { LoginSignupComponent } from './login-signup/login-signup.component';
 import { HeaderComponent } from './header/header.component';
+import { InpTextService } from "./_services/inp-text.service";
 
 @NgModule({
   declarations: [
@@ -41,7 +42,7 @@ import { HeaderComponent } from './header/header.component';
     ReactiveFormsModule,
     routing
   ],
-  providers: [AuthGuardService, UserIdService, FileUploadService],
+  providers: [AuthGuardService, UserIdService, FileUploadService, InpTextService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

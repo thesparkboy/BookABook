@@ -1,12 +1,35 @@
 
-<!------ Include the above in your HEAD tag ---------->
-
-<!-- Team -->
 <section id="team" class="pb-5">
   <div class="container">
+    <div style="margin-bottom: 2rem;">
+      <span>Filter By: </span>
+      <div class="form-check-inline">
+        <div class="form-check">
+          <label class="form-check-label" for="price">
+            <input [(ngModel)]="priceBoxValue" (change)="setPriceFilter(priceBoxValue)" type="checkbox" class="form-check-input" name="price" id="price"> Price
+          </label>
+        </div>
+        <div class="form-check">
+          <label class="form-check-label" for="condition">
+            <input [(ngModel)]="conditionBoxValue" (change)="setConditionFilter(conditionBoxValue)" type="checkbox" class="form-check-input" name="condition" id="condition"> Condition
+          </label>
+        </div>
+      </div>
+      <span *ngIf="showPriceFilter" style="margin-right: 1rem">
+        <label class="form-check-label" for="min" style="margin-left: 2rem">Min
+          <input  [(ngModel)] = 'minPrice' style="width: 5em;" id="min">
+        </label>
+        <label class="form-check-label" for="min" style="margin-left: 2rem">Max
+          <input [(ngModel)] = 'maxPrice' style="width: 5em;" id="max">
+        </label>
+      </span>
+      <select [(ngModel)]="selectedCond" *ngIf="showConditionFilter" (ngModelChange)="selectedCondition($event)" style="margin-left: 2rem;margin-right: 1rem;"  >
+        <option *ngFor="let c of conditions" [ngValue]="c"> {{c}} </option>
+      </select>
+      <button (click)="reset()" class="btn btn-info">Reset</button>
+    </div>
     <div class="row">
-      <!-- Team member -->
-      <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let item of items">
+      <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let item of filter(items)">
         <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
           <div class="mainflip">
             <div class="frontside">
@@ -45,24 +68,3 @@
     </div>
   </div>
 </section>
-<!-- Team -->
-
-
-
-<!--<div class="container">-->
-    <!--<div class="row row-offcanvas row-offcanvas-right">-->
-      <!--<div *ngFor="let item of items ; let i = index">-->
-        <!--<div class="card" style="width: 18rem;margin: 2rem;">-->
-          <!--<img class="card-img-top" src="{{ item.imgUrl }}" style="width: 286px;height: 210px;" alt="Card image cap">-->
-          <!--<div class="card-body">-->
-            <!--<h5 class="card-title">Book - {{ item.bookName }}</h5>-->
-            <!--<span>Author - {{ item.authorName }}</span><br>-->
-            <!--<span>Condition - {{ item.condition }}</span><br>-->
-            <!--<span>Price - {{ item.price }}</span><br>-->
-            <!--<button id="{{ item.id }}" (click)="showDetail($event)" class="btn btn-primary">View Details</button>-->
-            <!--<button id="{{ item.id }}" (click)="addToWishlist($event)" class="btn btn-primary">Add to Wishlist</button>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
-  <!--</div>-->
-<!--</div>-->

@@ -26,7 +26,7 @@ export class WishlistComponent implements OnInit {
     let userId : number = this.userIdService.getUserId();
     this.http.get('http://localhost:2000/wishlist/' + userId, {headers: headers}).subscribe(data => {
       this.items = data;
-      console.log(this.items)
+      // console.log(this.items)
     })
   }
 

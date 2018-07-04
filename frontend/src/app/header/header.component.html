@@ -2,29 +2,29 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+  <div class="collapse navbar-collapse in" id="navbarTogglerDemo01">
     <a class="navbar-brand" [routerLink]="['/listings']">BookaBook</a>
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item active">
-        <a class="nav-link" [routerLink]="['/listings']"><i class="fa fa-book" aria-hidden="true"></i>Listings <span class="sr-only">(current)</span></a>
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0" *ngIf="isLoggedIn">
+      <li class="nav-item" [ngClass]="{active : activeMenu === 'listings'}" (click)="setActive('listings')">
+        <a class="nav-link" [routerLink]="['/listings']"><i class="fa fa-book" aria-hidden="true"></i> Listings <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/listings/add']">Add listing</a>
+      <li class="nav-item" [ngClass]="{active : activeMenu == 'add'}" (click)="setActive('add')">
+        <a class="nav-link" [routerLink]="['/listings/add']"><i class="fa fa-plus-square-o" aria-hidden="true"></i> Add listing</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/listings']">My Listings</a>
+      <li class="nav-item" [ngClass]="{active : activeMenu === 'my'}" (click)="setActive('my')">
+        <a class="nav-link" [routerLink]="['/listings']"><i class="fa fa-bookmark-o" aria-hidden="true"></i> My Listings</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/wishlist']">Wishlist</a>
+      <li class="nav-item" [ngClass]="{active : activeMenu === 'wishlist'}" (click)="setActive('wishlist')">
+        <a class="nav-link" [routerLink]="['/wishlist']"><i class="fa fa-heart" aria-hidden="true"></i> Wishlist</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/messages']">Messages</a>
+      <li class="nav-item" [ngClass]="{active : activeMenu === 'messages'}" (click)="setActive('messages')">
+        <a class="nav-link" [routerLink]="['/messages']"><i class="fa fa-comments" aria-hidden="true"></i> Messages</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    <form class="form-inline my-2 my-lg-0" *ngIf="isLoggedIn && !(activeMenu === 'wishlist') && !(activeMenu === 'messages') && !(activeMenu === 'add')">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search by book or author" aria-label="Search" name="search" [(ngModel)]="currentText" (keyup)="change($event)">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="margin-right: 2rem;">Search</button>
     </form>
-    <button class="btn btn-primary" [routerLink]="['/logout']">Logout</button>
+    <button *ngIf="isLoggedIn" class="btn btn-primary" [routerLink]="['/logout']" >Logout</button>
   </div>
 </nav>
