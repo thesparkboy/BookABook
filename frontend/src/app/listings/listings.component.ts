@@ -22,6 +22,7 @@ export class ListingsComponent implements OnInit {
   selectedFiler: string = 'Price';
   priceBoxValue: any;
   conditionBoxValue: any;
+  selectedCond: string;
   // c: string = '';
 
   constructor(
@@ -37,6 +38,7 @@ export class ListingsComponent implements OnInit {
 
 
   ngOnInit() {
+    this.selectedCond = 'New';
     const headers = new HttpHeaders()
       .set('Authorization', 'my-auth-token')
       .set('Content-Type', 'application/json');

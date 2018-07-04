@@ -25,6 +25,8 @@ export class LoginSignupComponent implements OnInit {
   phone: string = '';
   address: string = 'ggsipu';
   invalid : boolean = false;
+  valid : boolean = true;
+
 
   ngOnInit() {
     if(localStorage.getItem('token') != undefined)
@@ -37,41 +39,65 @@ export class LoginSignupComponent implements OnInit {
       .set('Authorization', 'my-auth-token')
       .set('Content-Type', 'application/json');
 
-    // console.log(obj);
 
     this.http.post('http://localhost:2000/login', obj, {
       headers: headers
     }).subscribe(data => {
-      // console.log(data);
       if(data){
         window.localStorage.setItem('token',this.loginemail);
         window.localStorage.setItem('userId',data['id']);
         this.router.navigate(['listings']);
-        this.invalid = false;
       } else {
-        this.invalid = true;
+        alert('Invalid Credentials!');
       }
     });
   }
 
+  chk(event) {
+    if(event.keyCode == 13) {
+     this.login();
+    }
+  }
 
   signup() {
-    var obj = {name: this.name, password: this.password, email: this.email, college: this.college, address: this.address, phone: this.phone}
-
     const headers = new HttpHeaders()
       .set('Authorization', 'my-auth-token')
       .set('Content-Type', 'application/json');
 
-    // console.log(obj);
+    var obj = {name: this.name, password: this.password, email: this.email, college: this.college, address: this.address, phone: this.phone}
 
-    this.http.post('http://localhost:2000/signup', obj, {
-      headers: headers
-    }).subscribe(data => {
-      if(data) {
-        this.router.navigate(['listings']);
-      } else {
-        console.log(data);
-      }
-    });
+    if(this.name.length == 0){
+      alert("Name Can't be Empty!");
+      this.valid = false;
+    } else if(this.email.length == 0){
+      alert("Email Can't be Empty!");
+      this.valid = false;
+    } else if(this.password.length == 0){
+      alert("Password Can't be Empty!");
+      this.valid = false;
+    } else if(this.phone.length != 10){
+      alert("Phone number must be 10 digits!");
+      this.valid = false;
+    } else if(isNaN(parseInt(this.phone))) {
+      alert("Phone number should only contain digits!");
+      this.valid = false;
+    }
+
+    if(this.valid) {
+      this.http.post('http://localhost:2000/signup', obj, {
+        headers: headers
+      }).subscribe(data => {
+        // console.log(data);
+        if(data['status'] == 'success') {
+          window.localStorage.setItem('token',this.email);
+          window.localStorage.setItem('userId',data['id']);
+          this.router.navigate(['listings']);
+        } else if(data['status'] == 'email'){
+            alert('Email Already Registered!')
+        } else {
+          console.log(data);
+        }
+      });
+    }
   }
 }

@@ -1,0 +1,72 @@
+
+<section id="team" class="pb-5">
+
+  <div class="container">
+    <div style="margin-bottom: 2rem;">
+      <span>Filter By: </span>
+      <div class="form-check-inline">
+        <div class="form-check">
+          <label class="form-check-label" for="price">
+            <input [(ngModel)]="priceBoxValue" (change)="setPriceFilter(priceBoxValue)" type="checkbox" class="form-check-input" name="price" id="price"> Price
+          </label>
+        </div>
+        <div class="form-check">
+          <label class="form-check-label" for="condition">
+            <input [(ngModel)]="conditionBoxValue" (change)="setConditionFilter(conditionBoxValue)" type="checkbox" class="form-check-input" name="condition" id="condition"> Condition
+          </label>
+        </div>
+      </div>
+      <span *ngIf="showPriceFilter" style="margin-right: 1rem">
+        <label class="form-check-label" for="min" style="margin-left: 2rem">Min
+          <input  [(ngModel)] = 'minPrice' style="width: 5em;" id="min">
+        </label>
+        <label class="form-check-label" for="min" style="margin-left: 2rem">Max
+          <input [(ngModel)] = 'maxPrice' style="width: 5em;" id="max">
+        </label>
+      </span>
+      <select [(ngModel)]="selectedCond" *ngIf="showConditionFilter" (ngModelChange)="selectedCondition($event)" style="margin-left: 2rem;margin-right: 1rem;"  >
+        <option *ngFor="let c of conditions" [ngValue]="c"> {{c}} </option>
+      </select>
+      <button (click)="reset()" class="btn btn-info">Reset</button>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let item of filter(items)">
+        <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+          <div class="mainflip">
+            <div class="frontside">
+              <div class="card">
+                <div class="card-body text-center">
+                  <p><img class="img-fluid" src="{{ item.imgUrl }}" alt="card image"></p>
+                  <h4 class="card-title"><strong>{{ item.bookName }}</strong></h4>
+                  <p class="card-text"><strong>Price</strong> - Rs.{{ item.price }}</p>
+                  <p class="card-text"><strong>Author</strong> - {{ item.authorName}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="backside">
+              <div class="card">
+                <div class="card-body text-center mt-4">
+                  <h4 class="card-title">{{ item.bookName }}</h4>
+                  <p class="card-text" align="left" style="margin-left: 4rem; margin-top: 2rem;">
+                    <span><strong>Author:</strong> {{ item.authorName }} </span><br>
+                    <span><strong>Price:</strong> {{ item.price}}</span><br>
+                    <span><strong>Condition:</strong> {{ item.condition }}</span><br>
+                  </p>
+                  <ul class="list-inline" style="margin-top: 4rem;">
+                    <li class="list-inline-item">
+                      <button class="btn btn-info" id="{{ item.id }}" (click)="showDetail($event)">View Details</button>
+                    </li>
+                    <li class="list-inline-item">
+                      <button class="btn btn-danger" id="{{ item.id }}" (click)="removeFromListings($event)">Remove this Listing</button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

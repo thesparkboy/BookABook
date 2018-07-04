@@ -1,0 +1,5 @@
+body{background: #eee url(http://subtlepatterns.com/patterns/sativa.png);}
+
+#team {
+  background: #eee url(http://subtlepatterns.com/patterns/sativa.png) !important;
+}

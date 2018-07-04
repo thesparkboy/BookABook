@@ -1,8 +1,7 @@
-/* FontAwesome for working BootSnippet :> */
 
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 #team {
-  background: #eee !important;
+  background: #eee url(http://subtlepatterns.com/patterns/sativa.png) !important;
 }
 
 .btn-primary:hover,
@@ -21,6 +20,7 @@
 
 section {
   padding: 60px 0;
+
 }
 
 section .section-title {

@@ -36,8 +36,8 @@
               <div class="card">
                 <div class="card-body text-center">
                   <p><img class="img-fluid" src="{{ item.imgUrl }}" alt="card image"></p>
-                  <h4 class="card-title">{{ item.bookName }}</h4>
-                  <p class="card-text">Price - Rs.{{ item.price }}</p>
+                  <h4 class="card-title"><strong>{{ item.bookName }}</strong></h4>
+                  <p class="card-text"><strong>Price</strong> - Rs.{{ item.price }}</p>
                   <a class="btn btn-primary btn-sm" id="{{ item.id }}" (click)="addToWishlist($event)"><i class="fa fa-plus"></i></a>
                 </div>
               </div>
@@ -53,7 +53,7 @@
                   </p>
                   <ul class="list-inline" style="margin-top: 4rem;">
                     <li class="list-inline-item">
-                      <button class="btn btn-primary" id="{{ item.id }}" (click)="showDetail($event)">View Details</button>
+                      <button class="btn btn-info" id="{{ item.id }}" (click)="showDetail($event)">View Details</button>
                     </li>
                     <li class="list-inline-item">
                       <button class="btn btn-primary" id="{{ item.id }}" (click)="addToWishlist($event)">Add to Wishlist</button>

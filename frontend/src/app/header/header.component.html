@@ -12,7 +12,7 @@
         <a class="nav-link" [routerLink]="['/listings/add']"><i class="fa fa-plus-square-o" aria-hidden="true"></i> Add listing</a>
       </li>
       <li class="nav-item" [ngClass]="{active : activeMenu === 'my'}" (click)="setActive('my')">
-        <a class="nav-link" [routerLink]="['/listings']"><i class="fa fa-bookmark-o" aria-hidden="true"></i> My Listings</a>
+        <a class="nav-link" [routerLink]="['/mylistings']"><i class="fa fa-bookmark-o" aria-hidden="true"></i> My Listings</a>
       </li>
       <li class="nav-item" [ngClass]="{active : activeMenu === 'wishlist'}" (click)="setActive('wishlist')">
         <a class="nav-link" [routerLink]="['/wishlist']"><i class="fa fa-heart" aria-hidden="true"></i> Wishlist</a>
@@ -21,7 +21,7 @@
         <a class="nav-link" [routerLink]="['/messages']"><i class="fa fa-comments" aria-hidden="true"></i> Messages</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0" *ngIf="isLoggedIn && !(activeMenu === 'wishlist') && !(activeMenu === 'messages') && !(activeMenu === 'add')">
+    <form class="form-inline my-2 my-lg-0" *ngIf="isLoggedIn && !(activeMenu === 'messages') && !(activeMenu === 'add')">
       <input class="form-control mr-sm-2" type="search" placeholder="Search by book or author" aria-label="Search" name="search" [(ngModel)]="currentText" (keyup)="change($event)">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="margin-right: 2rem;">Search</button>
     </form>
