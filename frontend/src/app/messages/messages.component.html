@@ -1,0 +1,48 @@
+<div class="container">
+  <div style="margin-top: 2rem;">
+    <button style="display: inline;margin-right: 2rem;" class="btn btn-info" (click)="ngOnInit()">Recieved</button>
+    <button style="display: inline" class="btn btn-info" (click)="sent()">Sent</button>
+  </div>
+
+  <div class="card" *ngFor="let message of messages">
+    <div class="card-header">
+        <span *ngIf="message.from != userId" style="display:inline;">From: {{ message.senderName }}</span>
+        <span *ngIf="message.from == userId" style="display:inline;">To: {{ message.recieverName }}</span>
+        <span *ngIf="message.from != userId" style="display:inline;float: right;">Recieved at: {{ message.createdAt.split('T')[0] + " " + message.createdAt.split('T')[1]}}</span>
+        <span *ngIf="message.from == userId" style="display:inline;float: right;">Sent at: {{ message.createdAt.split('T')[0] + " " + message.createdAt.split('T')[1]}}</span>
+    </div>
+    <div class="card-body">
+      <p class="card-text">{{ message.text }}</p>
+      <a *ngIf="message.from != userId" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModal" style="margin-right: 2rem;">Reply <i class="fa fa-reply" aria-hidden="true"></i></a>
+      <a *ngIf="message.from != userId" class="btn btn-outline-danger" (click)="delete(message.id)">Delete <i class="fa fa-trash" aria-hidden="true"></i></a>
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Recipient:</label>
+                  <input type="text" class="form-control" id="recipient-name" placeholder="{{ message.senderName }}" disabled>
+                </div>
+                <div class="form-group">
+                  <label for="message-text" class="col-form-label">Message:</label>
+                  <textarea class="form-control" id="message-text" name="mssg" [(ngModel)]="textMessage" style="height: 7rem;"></textarea>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-outline-info" id="{{ message.from }}" (click)="send($event)" data-dismiss="modal">Send message</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

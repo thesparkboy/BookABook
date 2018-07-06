@@ -1,15 +1,18 @@
 const express = require('express'),
       app = express(),
-      Users = require('./db').Users
-      Listings = require('./db').Listings
-      Wishlist = require('./db').Wishlist
-      bodyParser = require('body-parser')
-      upload = multer({dest: '/public'})
+      path = require('path'),
+      Users = require('./db').Users,
+      Listings = require('./db').Listings,
+      Wishlist = require('./db').Wishlist,
+      Messages = require('./db').Messages,
+      bodyParser = require('body-parser'),
+      multer  = require('multer'),
+      upload = multer({dest: 'public/'});
 
-app.use(express.json())
-app.use(express.urlencoded({extended: true}))
-app.use(express.static(__dirname + '/public'))
-app.use(bodyParser.json())
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.use("/public", express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json());
 
 app.all("/*", function(req, res, next){
     res.header('Access-Control-Allow-Origin', '*');
@@ -57,11 +60,17 @@ app.post('/signup', (req, res) => {
         }
     });
 })
+//
+// app.get('/users/:id', (req, res) => {
+//     Users.findOne({ where: { id: req.params.id} }).then(user => {
+//         res.send(user);
+//     }).then(() => {
+//
+//     }).catch((error) => {
+//         res.send({error})
+//     })
+// });
 
-
-app.post('/upload', (req, res) => {
-    console.log(req.files);
-})
 
 app.post('/listings/add', (req, res) => {
     if(req.body.imgUrl.length == 0){
@@ -77,11 +86,11 @@ app.post('/listings/add', (req, res) => {
         imgUrl: req.body.imgUrl,
         imgPath: req.body.imgPath
     }).then((product) => {
-        res.send({status:'Success'});
+        res.send(product);
     }).catch((error) => {
         res.send({error})
     })
-})
+});
 
 app.get('/listings/:id', (req, res) => {
     Listings.find({ where: { id: req.params.id} }).then(items => {
@@ -91,7 +100,7 @@ app.get('/listings/:id', (req, res) => {
     }).catch((error) => {
         res.send({error})
     })
-})
+});
 
 app.get('/mylistings/:id', (req, res) => {
     Listings.findAll({ where: { seller: req.params.id} }).then(items => {
@@ -101,7 +110,7 @@ app.get('/mylistings/:id', (req, res) => {
     }).catch((error) => {
         res.send({error})
     })
-})
+});
 
 
 app.post('/removefromlistings', (req, res) => {
@@ -114,7 +123,7 @@ app.post('/removefromlistings', (req, res) => {
     }).catch((error) => {
         res.send({error})
     })
-})
+});
 
 app.get('/listings', (req, res) => {
     Listings.findAll()
@@ -126,7 +135,7 @@ app.get('/listings', (req, res) => {
                 error: "Books could not be fetched."
             })
         })
-})
+});
 
 
 app.get('/wishlist/:id', (req, res) => {
@@ -139,6 +148,17 @@ app.get('/wishlist/:id', (req, res) => {
         res.send({error})
     })
 })
+
+
+app.get('/details/:id', (req, res) => {
+    Users.findOne({ where: { id: req.params.id } }).then(user => {
+        res.send(user);
+    }).then(() => {
+
+    }).catch((error) => {
+        res.send({error})
+    })
+});
 
 app.post('/addtowishlist', (req, res) => {
     Wishlist.findOrCreate({
@@ -153,7 +173,7 @@ app.post('/addtowishlist', (req, res) => {
     }).catch((error) => {
         res.send({error})
     })
-})
+});
 
 app.post('/removefromwishlist', (req, res) => {
     Wishlist.destroy({
@@ -166,12 +186,80 @@ app.post('/removefromwishlist', (req, res) => {
     }).catch((error) => {
         res.send({error})
     })
-})
+});
 
-app.post('/upload', upload.single('avatar'),(req, res, next) => {
-    
+app.get('/message/:id', (req, res) => {
+    Messages.findAll({
+        where : {
+            to: req.params.id
+        }
+    }).then((messages) => {
+        res.send(messages);
+    }).catch((error) => {
+        res.send({error})
+    })
+});
+
+app.get('/message/sent/:id', (req, res) => {
+    Messages.findAll({
+        where : {
+            from: req.params.id
+        }
+    }).then((messages) => {
+        res.send(messages);
+    }).catch((error) => {
+        res.send({error})
+    })
+});
+
+app.post('/message', (req, res) => {
+    Messages.create({
+        from: req.body.from,
+        to: req.body.to,
+        text: req.body.text,
+        recieverName : req.body.recieverName,
+        recieverEmail : req.body.recieverEmail,
+        senderName : req.body.senderName,
+        senderEmail : req.body.senderEmail
+    }).then((product) => {
+        res.send({status: 'success'})
+    }).catch((error) => {
+        res.send({error})
+    })
+});
+
+app.post('/message/delete', (req, res) => {
+    Messages.destroy({
+        where: {
+            id: req.body.id
+        }
+    }).then(() => {
+        res.send({status:'success'})
+    }).catch((error) => {
+        res.send({error})
+    })
+});
+
+
+app.post('/upload', upload.any() ,(req, res) => {
+    if(req.files[0] != undefined) {
+        console.log(req.files[0]);
+        let fileName = req.files[0].filename;
+        let id = req.query.id;
+        let path = 'http://localhost:2000/public/';
+        Listings.find({ where: { id: id} }).then(item => {
+            if(item) {
+                item.imgUrl = path + fileName;
+                item.save();
+            }
+        }).then(() => {
+        }).catch((error) => {
+            res.send({error})
+        })
+    }
+    res.send('');
 });
 
 app.listen(2000, function () {
     console.log('Server started on http://localhost:2000/')
-})
+});

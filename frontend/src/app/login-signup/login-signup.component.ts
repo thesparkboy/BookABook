@@ -87,7 +87,6 @@ export class LoginSignupComponent implements OnInit {
       this.http.post('http://localhost:2000/signup', obj, {
         headers: headers
       }).subscribe(data => {
-        // console.log(data);
         if(data['status'] == 'success') {
           window.localStorage.setItem('token',this.email);
           window.localStorage.setItem('userId',data['id']);
@@ -100,4 +99,10 @@ export class LoginSignupComponent implements OnInit {
       });
     }
   }
+
+  afuConfig = {
+    uploadAPI: {
+      url:"http://localhost:2000/upload"
+    }
+  };
 }

@@ -87,11 +87,37 @@ const Wishlist = db.define('wishlist', {
 
 })
 
+const Messages = db.define('message', {
+    from: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+    },
+    recieverName: {
+        type: Sequelize.STRING
+    },
+    recieverEmail: {
+        type: Sequelize.STRING
+    },
+    to: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+    },
+    senderName: {
+        type: Sequelize.STRING
+    },
+    senderEmail: {
+        type: Sequelize.STRING
+    },
+    text: {
+        type: Sequelize.STRING,
+        allowNull: false
+    }
+})
 
 db.sync()
     .then(() => console.log('Database synchronized successfully'))
     .catch((err) => console.error("Error creating database"))
 
 exports = module.exports = {
-    Users, Listings, Wishlist
+    Users, Listings, Wishlist, Messages
 }

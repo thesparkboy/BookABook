@@ -6,7 +6,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { FormsModule } from "@angular/forms";
-import { ImageUploadModule } from "angular2-image-upload";
+import { AngularFileUploaderModule } from "angular-file-uploader";
 
 
 import { routing } from "./app.routing";
@@ -23,6 +23,7 @@ import { LoginSignupComponent } from './login-signup/login-signup.component';
 import { HeaderComponent } from './header/header.component';
 import { InpTextService } from "./_services/inp-text.service";
 import { MyListingsComponent } from './my-listings/my-listings.component';
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { MyListingsComponent } from './my-listings/my-listings.component';
     TestComponentComponent,
     LoginSignupComponent,
     HeaderComponent,
-    MyListingsComponent
+    MyListingsComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +44,7 @@ import { MyListingsComponent } from './my-listings/my-listings.component';
     HttpClientModule,
     ReactiveFormsModule,
     NgbModule.forRoot(),
-    ImageUploadModule.forRoot(),
+    AngularFileUploaderModule,
     routing
   ],
   providers: [AuthGuardService, UserIdService, FileUploadService, InpTextService],

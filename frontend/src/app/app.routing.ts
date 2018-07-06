@@ -8,6 +8,7 @@ import { NewListingComponent } from "./new-listing/new-listing.component";
 import {TestComponentComponent} from "./test-component/test-component.component";
 import {LoginSignupComponent} from "./login-signup/login-signup.component";
 import {MyListingsComponent} from "./my-listings/my-listings.component";
+import {MessagesComponent} from "./messages/messages.component";
 
 const appRoutes: Routes = [
   { path: '', component: LoginSignupComponent},
@@ -18,8 +19,9 @@ const appRoutes: Routes = [
   { path: 'listings/:id', component: ListingComponent, canActivate: [AuthGuard]},
   { path: 'wishlist', component: WishlistComponent, canActivate: [AuthGuard]},
   { path: 'mylistings', component: MyListingsComponent, canActivate: [AuthGuard]},
+  { path: 'messages', component: MessagesComponent, canActivate: [AuthGuard]},
   { path: 'test', component: TestComponentComponent},
-  { path: '**', redirectTo: '/login' }
+  { path: '**', redirectTo: '/listings  ' }
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);

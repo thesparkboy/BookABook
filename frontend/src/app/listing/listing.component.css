@@ -1,0 +1,12 @@
+.gallery-wrap .img-big-wrap img {
+  width: 100%;
+  height: auto;
+  display: inline-block;
+  cursor: zoom-in;
+}
+.container {
+  margin-top: 5rem;
+}
+img {
+  margin-top: 4rem;
+}

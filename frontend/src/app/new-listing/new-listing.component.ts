@@ -16,6 +16,7 @@ export class NewListingComponent implements OnInit {
   price : string = '';
   condition : string = 'New';
   imgUrl : string = '';
+  image: any;
   fileToUpload: File = null;
   obj: object = {};
   valid: boolean = true;
@@ -63,6 +64,8 @@ export class NewListingComponent implements OnInit {
         this.http.post('http://localhost:2000/listings/add', this.obj, {
           headers: headers
         }).subscribe(data => {
+           console.log(data);
+           this.fileUploadService.addProduct(this.image, data['id']);
            alert('Listing added Successfully!');
            this.bookName = '';
            this.author = '';
@@ -74,5 +77,9 @@ export class NewListingComponent implements OnInit {
 
   selectedCondition(condition) {
     this.condition = condition;
+  }
+
+  handleFileInput(files: FileList) {
+    this.image = files.item(0);
   }
 }

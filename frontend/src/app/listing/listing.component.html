@@ -1,3 +1,71 @@
-<p>BookName - {{item.bookName}}</p>
-<p>Atuhor - {{item.authorName}}</p>
-<p>Price - {{item.price}}</p>
+
+<div class="container">
+  <div class="card">
+    <div class="row">
+      <aside class="col-sm-5 border-right">
+        <article class="gallery-wrap">
+          <div class="img-big-wrap">
+            <img src="{{ item.imgUrl }}">
+          </div>
+        </article>
+      </aside>
+      <aside class="col-sm-7">
+        <article class="card-body p-5">
+          <h3 class="title mb-3">{{ item.bookName }}</h3>
+          <p class="price-detail-wrap">
+            <span class="price h3 text-warning">
+              <span class="currency">Rs. </span><span class="num">{{ item.price }}</span>
+            </span>
+          </p>
+          <dl class="item-property">
+            <dt>Product Id - </dt>
+            <dd># {{ item.id }}</dd>
+          </dl>
+          <dl class="param param-feature">
+            <dt>Author</dt>
+            <dd>{{ item.authorName }}</dd>
+          </dl>
+          <dl class="param param-feature">
+            <dt>Condition</dt>
+            <dd>{{ item.condition }}</dd>
+          </dl>
+          <dl class="param param-feature">
+            <dt>Seller </dt>
+            <dd>{{ sellerName }}</dd>
+          </dl>
+          <button type="button" class="btn btn-lg btn-info" data-toggle="modal" data-target="#exampleModal" style="margin-right: 2rem;">Contact Seller </button>
+          <button class="btn btn-lg btn-info" id="{{ item.id }}" (click)="addToWishlist($event)">Add to Wishlist <i class="fa fa-heart"></i></button>
+
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="form-group">
+                      <label for="recipient-name" class="col-form-label">Recipient:</label>
+                      <input type="text" class="form-control" id="recipient-name" placeholder="{{sellerName}}" disabled>
+                    </div>
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Message:</label>
+                      <textarea class="form-control" id="message-text" name="mssg" [(ngModel)]="textMessage" style="height: 7rem;"></textarea>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-outline-info" (click)="send()" data-dismiss="modal">Send message</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </aside>
+    </div>
+  </div>
+</div>
