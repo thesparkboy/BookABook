@@ -22,15 +22,9 @@ export class FileUploadService {
       .set('Authorization', 'my-auth-token')
       .set('Content-Type', 'multipart/form-data');
 
-    // console.log(image);
-    formData.append('avatar', image, id.toString());
+    formData.append('avatar', image);
     this.http.post('http://localhost:2000/upload?id=' + id, formData).subscribe(value =>{
       return 'item uploaded successfully';
     });
-    // this.http.post('http://localhost:3000/upload', data, {headers: headers}).subscribe(data =>{
-    //   let id = data;
-    //   console.log(id);
-    //
-    // })
   }
 }

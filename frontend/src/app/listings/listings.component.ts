@@ -13,7 +13,7 @@ export class ListingsComponent implements OnInit {
   items : any = '';
   text: string = '';
   options: string[] = ['Price', 'Condition'];
-  conditions: string[] = ['New', 'Almost New','Slighlty Damaged', 'Worn'];
+  conditions: string[] = ['New', 'Almost New', 'Slighlty Damaged', 'Worn'];
   minPrice: number = 0;
   maxPrice: number = 10000000 ;
   condition = '';
@@ -23,6 +23,8 @@ export class ListingsComponent implements OnInit {
   priceBoxValue: any;
   conditionBoxValue: any;
   selectedCond: string;
+  sortPrice: any;
+  sortCondition: any;
   // c: string = '';
 
   constructor(
@@ -88,6 +90,19 @@ export class ListingsComponent implements OnInit {
         }
       }
     }
+    if(this.sortPrice) {
+      arr.sort((a,b) => (a.price - b.price));
+    }
+    if(this.sortCondition) {
+      arr.sort((a,b) => (this.conditions.indexOf(a.condition) - this.conditions.indexOf(b.condition)));
+    }
+    if(this.sortCondition && this.sortPrice) {
+      arr.sort((a,b) => {
+        if(a.price != b.price) {
+          return a.price - b.price;
+        }
+        return this.conditions.indexOf(a.condition) - this.conditions.indexOf(b.condition)});
+    }
     return arr;
   }
 
@@ -103,6 +118,14 @@ export class ListingsComponent implements OnInit {
     this.condition = condition;
   }
 
+  setSortPrice(sortPrice) {
+    this.sortPrice = sortPrice;
+  }
+
+  setSortCondition(sortCondition) {
+    this.sortCondition = sortCondition;
+  }
+
   reset() {
     this.showConditionFilter = false;
     this.showPriceFilter = false;
@@ -111,5 +134,7 @@ export class ListingsComponent implements OnInit {
     this.maxPrice = 1000000;
     this.priceBoxValue = false;
     this.conditionBoxValue = false;
+    this.sortPrice = false;
+    this.sortCondition = false;
   }
 }

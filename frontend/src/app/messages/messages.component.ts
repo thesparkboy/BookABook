@@ -38,6 +38,7 @@ export class MessagesComponent implements OnInit {
     this.userId = this.userIdService.getUserId();
     this.http.get('http://localhost:2000/message/' + this.userId, {headers: this.headers}).subscribe(data => {
       this.messages = data;
+      this.messages.reverse();
     })
 
     this.http.get('http://localhost:2000/details/' + this.userId, {headers: this.headers}).subscribe(userDetails => {
@@ -57,8 +58,8 @@ export class MessagesComponent implements OnInit {
         senderEmail:this.userEmail,recieverName:this.reciverName,recieverEmail:this.reciverEmail,
         text: this.textMessage};
 
-      console.log(this.reciverId);
-      console.log(this.userId);
+      // console.log(this.reciverId);
+      // console.log(this.userId);
       if(this.reciverId == this.userId) {
         alert("Sender and Recipient Can't be same");
         return;
@@ -79,6 +80,7 @@ export class MessagesComponent implements OnInit {
       headers: this.headers
     }).subscribe(data => {
       this.messages = data;
+      this.messages.reverse();
     });
   }
 

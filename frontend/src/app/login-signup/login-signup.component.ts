@@ -39,13 +39,12 @@ export class LoginSignupComponent implements OnInit {
       .set('Authorization', 'my-auth-token')
       .set('Content-Type', 'application/json');
 
-
     this.http.post('http://localhost:2000/login', obj, {
       headers: headers
     }).subscribe(data => {
       if(data){
-        window.localStorage.setItem('token',this.loginemail);
-        window.localStorage.setItem('userId',data['id']);
+        window.localStorage.setItem('jwt_token',data['token']);
+        window.localStorage.setItem('userId', data['id']);
         this.router.navigate(['listings']);
       } else {
         alert('Invalid Credentials!');
@@ -60,6 +59,7 @@ export class LoginSignupComponent implements OnInit {
   }
 
   signup() {
+    this.valid = true;
     const headers = new HttpHeaders()
       .set('Authorization', 'my-auth-token')
       .set('Content-Type', 'application/json');
@@ -87,8 +87,10 @@ export class LoginSignupComponent implements OnInit {
       this.http.post('http://localhost:2000/signup', obj, {
         headers: headers
       }).subscribe(data => {
+        // console.log('==========');
         if(data['status'] == 'success') {
-          window.localStorage.setItem('token',this.email);
+          // console.log(data);
+          window.localStorage.setItem('jwt_token',data['token']);
           window.localStorage.setItem('userId',data['id']);
           this.router.navigate(['listings']);
         } else if(data['status'] == 'email'){

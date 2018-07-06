@@ -38,6 +38,9 @@ const Users = db.define('users', {
     },
     phone: {
         type: Sequelize.STRING
+    },
+    token: {
+        type: Sequelize.STRING
     }
 })
 

@@ -21,6 +21,7 @@ export class NewListingComponent implements OnInit {
   obj: object = {};
   valid: boolean = true;
   conditions: string[] = ['New', 'Almost New','Slighlty Damaged', 'Worn'];
+  chosenFileName: string = 'No File Chosen...'
 
   constructor(private http: HttpClient,private userIdService: UserIdService,private fileUploadService: FileUploadService) { }
 
@@ -64,7 +65,7 @@ export class NewListingComponent implements OnInit {
         this.http.post('http://localhost:2000/listings/add', this.obj, {
           headers: headers
         }).subscribe(data => {
-           console.log(data);
+           // console.log(data);
            this.fileUploadService.addProduct(this.image, data['id']);
            alert('Listing added Successfully!');
            this.bookName = '';
@@ -81,5 +82,6 @@ export class NewListingComponent implements OnInit {
 
   handleFileInput(files: FileList) {
     this.image = files.item(0);
+    this.chosenFileName = files.item(0)['name'];
   }
 }

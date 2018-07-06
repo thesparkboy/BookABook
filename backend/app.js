@@ -33,12 +33,16 @@ app.post('/login', function (req, res) {
         if (!user) {
             res.send('');
         } else {
-            res.send({check : 'valid', id: user.id});
+            res.send({check : 'valid', id: user.id, token: user.token});
         }
     });
 })
 
 app.post('/signup', (req, res) => {
+    var token = '';
+    require('crypto').randomBytes(48, function(err, buffer) {
+        token = buffer.toString('hex');
+    });
     Users.findOne({ where: { email: req.body.email} }).then(function (user) {
         if (user) {
             res.send(JSON.stringify({status : 'email', id: user.id}));
@@ -51,26 +55,26 @@ app.post('/signup', (req, res) => {
                 email: req.body.email,
                 college: req.body.college,
                 address: req.body.address,
-                phone: req.body.phone
+                phone: req.body.phone,
+                token: token
             }).then((user) => {
-                res.send(JSON.stringify({status : 'success', id: user.id}));
+                res.send(JSON.stringify({status : 'success', id: user.id, token: token}));
             }).catch((error) => {
                 res.send(false)
             })
         }
     });
 })
-//
-// app.get('/users/:id', (req, res) => {
-//     Users.findOne({ where: { id: req.params.id} }).then(user => {
-//         res.send(user);
-//     }).then(() => {
-//
-//     }).catch((error) => {
-//         res.send({error})
-//     })
-// });
 
+app.get('/gettoken/:id',(req, res) => {
+    Users.findOne({ where: { id: req.params.id} }).then(function (user) {
+        if (!user) {
+            res.send({check : 'invalid'});
+        } else {
+            res.send({check : 'valid', token: user.token});
+        }
+    });
+});
 
 app.post('/listings/add', (req, res) => {
     if(req.body.imgUrl.length == 0){
@@ -243,7 +247,7 @@ app.post('/message/delete', (req, res) => {
 
 app.post('/upload', upload.any() ,(req, res) => {
     if(req.files[0] != undefined) {
-        console.log(req.files[0]);
+        // console.log(req.files[0]);
         let fileName = req.files[0].filename;
         let id = req.query.id;
         let path = 'http://localhost:2000/public/';

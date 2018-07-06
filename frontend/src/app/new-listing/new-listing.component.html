@@ -14,7 +14,7 @@
         <div class="file-upload" style="margin-top: 1rem;">
           <div class="file-select">
             <div class="file-select-button" id="fileName">Choose Book Image</div>
-            <div class="file-select-name" id="noFile">No file chosen...</div>
+            <div class="file-select-name" id="noFile">{{ chosenFileName }}</div>
             <input type="file" id="chooseFile" name="avatar" accept="image/png, image/jpg, image/jpeg" (change)="handleFileInput($event.target.files)">
           </div>
         </div>

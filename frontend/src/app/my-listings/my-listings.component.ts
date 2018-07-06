@@ -35,6 +35,8 @@ export class MyListingsComponent implements OnInit {
   showConditionFilter: boolean = false;
   priceBoxValue: any;
   conditionBoxValue: any;
+  sortPrice: any;
+  sortCondition: any;
 
   ngOnInit() {
     const headers = new HttpHeaders()
@@ -84,6 +86,19 @@ export class MyListingsComponent implements OnInit {
         }
       }
     }
+    if(this.sortPrice) {
+      arr.sort((a,b) => (a.price - b.price));
+    }
+    if(this.sortCondition) {
+      arr.sort((a,b) => (this.conditions.indexOf(a.condition) - this.conditions.indexOf(b.condition)));
+    }
+    if(this.sortCondition && this.sortPrice) {
+      arr.sort((a,b) => {
+        if(a.price != b.price) {
+          return a.price - b.price;
+        }
+        return this.conditions.indexOf(a.condition) - this.conditions.indexOf(b.condition)});
+    }
     return arr;
   }
 
@@ -99,6 +114,14 @@ export class MyListingsComponent implements OnInit {
     this.condition = condition;
   }
 
+  setSortPrice(sortPrice) {
+    this.sortPrice = sortPrice;
+  }
+
+  setSortCondition(sortCondition) {
+    this.sortCondition = sortCondition;
+  }
+
   reset() {
     this.showConditionFilter = false;
     this.showPriceFilter = false;
@@ -107,6 +130,8 @@ export class MyListingsComponent implements OnInit {
     this.maxPrice = 1000000;
     this.priceBoxValue = false;
     this.conditionBoxValue = false;
+    this.sortPrice = false;
+    this.sortCondition = false;
   }
 
 }

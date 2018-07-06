@@ -11,7 +11,7 @@ import {MyListingsComponent} from "./my-listings/my-listings.component";
 import {MessagesComponent} from "./messages/messages.component";
 
 const appRoutes: Routes = [
-  { path: '', component: LoginSignupComponent},
+  { path: '', component: ListingComponent, canActivate: [AuthGuard]},
   { path: 'login', component: LoginSignupComponent},
   { path: 'logout', component: LoginSignupComponent, canActivate: [AuthGuard]},
   { path: 'listings', component: ListingsComponent, canActivate: [AuthGuard]},
@@ -21,7 +21,7 @@ const appRoutes: Routes = [
   { path: 'mylistings', component: MyListingsComponent, canActivate: [AuthGuard]},
   { path: 'messages', component: MessagesComponent, canActivate: [AuthGuard]},
   { path: 'test', component: TestComponentComponent},
-  { path: '**', redirectTo: '/listings  ' }
+  { path: '**', redirectTo: '/listings' }
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);

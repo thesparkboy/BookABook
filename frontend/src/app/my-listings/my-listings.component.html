@@ -3,7 +3,7 @@
 
   <div class="container">
     <div style="margin-bottom: 2rem;">
-      <span>Filter By: </span>
+      <span>Filters: </span>
       <div class="form-check-inline">
         <div class="form-check">
           <label class="form-check-label" for="price">
@@ -13,6 +13,19 @@
         <div class="form-check">
           <label class="form-check-label" for="condition">
             <input [(ngModel)]="conditionBoxValue" (change)="setConditionFilter(conditionBoxValue)" type="checkbox" class="form-check-input" name="condition" id="condition"> Condition
+          </label>
+        </div>
+      </div>
+      <div class="form-check-inline">
+        <div class="form-check">
+          <label class="form-check-label" for="sortPrice">
+            <input [(ngModel)]="sortPrice" (change)="setSortPrice(sortPrice)" type="checkbox" class="form-check-input" name="sortPrice" id="sortPrice"> Sort By Price
+          </label>
+        </div>
+
+        <div class="form-check">
+          <label class="form-check-label" for="sortCondition">
+            <input [(ngModel)]="sortCondition" (change)="setSortCondition(sortCondition)" type="checkbox" class="form-check-input" name="sortCondition" id="sortCondition"> Sort By Condition
           </label>
         </div>
       </div>
