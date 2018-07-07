@@ -48,22 +48,22 @@ export class MessagesComponent implements OnInit {
   }
 
 
-  send($event) {
-    this.reciverId = parseInt($event.target.id);
+  send(objct) {
+    this.reciverId = parseInt(objct.event.target.id);
+    let productId = objct.id;
     this.http.get('http://localhost:2000/details/' + this.reciverId, {headers: this.headers}).subscribe(data => {
       this.reciverName = data['name'];
       this.reciverEmail = data['email'];
 
       var obj: object = {to: this.reciverId, from: this.userId,senderName: this.userName,
         senderEmail:this.userEmail,recieverName:this.reciverName,recieverEmail:this.reciverEmail,
-        text: this.textMessage};
+        text: this.textMessage,productId: productId};
 
-      // console.log(this.reciverId);
-      // console.log(this.userId);
       if(this.reciverId == this.userId) {
         alert("Sender and Recipient Can't be same");
         return;
       }
+
       this.http.post('http://localhost:2000/message', obj, {
         headers: this.headers
       }).subscribe(data => {
@@ -92,5 +92,11 @@ export class MessagesComponent implements OnInit {
         this.ngOnInit();
       }
     });
+  }
+
+  product(id) {
+    console.log(id);
+    let path = 'listings/' + id;
+    this.router.navigate([path]);
   }
 }

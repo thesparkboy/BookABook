@@ -78,7 +78,7 @@ app.get('/gettoken/:id',(req, res) => {
 
 app.post('/listings/add', (req, res) => {
     if(req.body.imgUrl.length == 0){
-        req.body.imgUrl = 'http://www.purse-hanger.com/wp-content/uploads/2018/01/cartoon-picture-of-book-pink-book-reading-clip-art-at-clker-vector-clip-art-online-coloring-pages-for-kids.png'
+        req.body.imgUrl = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUeR3inb2aWsUD3dj1sFSRvoQZqU3VyjWuqyO6KTVW9rEz82QO';
     }
     Listings.create({
         id: req.body.id,
@@ -224,7 +224,8 @@ app.post('/message', (req, res) => {
         recieverName : req.body.recieverName,
         recieverEmail : req.body.recieverEmail,
         senderName : req.body.senderName,
-        senderEmail : req.body.senderEmail
+        senderEmail : req.body.senderEmail,
+        productId: req.body.productId
     }).then((product) => {
         res.send({status: 'success'})
     }).catch((error) => {

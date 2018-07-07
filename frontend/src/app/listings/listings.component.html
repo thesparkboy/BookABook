@@ -1,43 +1,39 @@
-
 <section id="team" class="pb-5">
   <div class="container">
     <div style="margin-bottom: 2rem;">
-      <span>Filter By: </span>
-      <div class="form-check-inline">
-        <div class="form-check">
+      <span>Filters: </span>
+      <div class="form-check form-check-inline row">
+        <div class="form-check col-sm-6">
           <label class="form-check-label" for="price">
             <input [(ngModel)]="priceBoxValue" (change)="setPriceFilter(priceBoxValue)" type="checkbox" class="form-check-input" name="price" id="price"> Price
           </label>
         </div>
-        <div class="form-check">
+        <div class="form-check col-sm-6">
           <label class="form-check-label" for="condition">
             <input [(ngModel)]="conditionBoxValue" (change)="setConditionFilter(conditionBoxValue)" type="checkbox" class="form-check-input" name="condition" id="condition"> Condition
           </label>
         </div>
-        <div class="form-check">
+        <div class="form-check col-sm-6">
           <label class="form-check-label" for="sortPrice">
             <input [(ngModel)]="sortPrice" (change)="setSortPrice(sortPrice)" type="checkbox" class="form-check-input" name="sortPrice" id="sortPrice"> Sort By Price
           </label>
         </div>
-
-        <div class="form-check">
+        <div class="form-check col-sm-6">
           <label class="form-check-label" for="sortCondition">
             <input [(ngModel)]="sortCondition" (change)="setSortCondition(sortCondition)" type="checkbox" class="form-check-input" name="sortCondition" id="sortCondition"> Sort By Condition
           </label>
         </div>
       </div>
       <span *ngIf="showPriceFilter" style="margin-right: 1rem">
-        <label class="form-check-label" for="min" style="margin-left: 2rem">Min
-          <input  [(ngModel)] = 'minPrice' style="width: 5em;" id="min">
-        </label>
-        <label class="form-check-label" for="min" style="margin-left: 2rem">Max
-          <input [(ngModel)] = 'maxPrice' style="width: 5em;" id="max">
-        </label>
+        <label class="form-check-label" for="min" style="margin-left: 1rem;margin-right: 0.5rem;">Min</label>
+        <input [(ngModel)] = 'minPrice' style="width: 5em;" id="min">
+        <label class="form-check-label" for="min" style="margin-left: 1rem;margin-right: 0.5rem;">Max</label>
+        <input [(ngModel)] = 'maxPrice' style="width: 5em;" id="max">
       </span>
-      <select [(ngModel)]="selectedCond" *ngIf="showConditionFilter" (ngModelChange)="selectedCondition($event)" style="margin-left: 2rem;margin-right: 1rem;"  >
+      <select class="selectpicker" [(ngModel)]="selectedCond" *ngIf="showConditionFilter" (ngModelChange)="selectedCondition($event)" style="margin-left: 1rem;margin-right: 1rem;"  >
         <option *ngFor="let c of conditions" [ngValue]="c"> {{c}} </option>
       </select>
-      <button (click)="reset()" class="btn btn-info">Reset</button>
+      <button (click)="reset()" class="btn btn-outline-primary">Reset</button>
     </div>
     <div class="row">
       <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let item of filter(items)">
@@ -49,7 +45,7 @@
                   <p><img class="img-fluid" src="{{ item.imgUrl }}" alt="card image"></p>
                   <h4 class="card-title"><strong>{{ item.bookName }}</strong></h4>
                   <p class="card-text"><strong>Price</strong> - Rs.{{ item.price }}</p>
-                  <a class="btn btn-primary btn-sm" id="{{ item.id }}" (click)="addToWishlist($event)"><i class="fa fa-plus"></i></a>
+                  <button class="btn btn-outline-info btn-sm" id="{{ item.id }}" (click)="addToWishlist($event)"><i class="fa fa-heart"></i></button>
                 </div>
               </div>
             </div>
@@ -64,10 +60,10 @@
                   </p>
                   <ul class="list-inline" style="margin-top: 4rem;">
                     <li class="list-inline-item">
-                      <button class="btn btn-info" id="{{ item.id }}" (click)="showDetail($event)">View Details</button>
+                      <button class="btn btn-warning" id="{{ item.id }}" (click)="showDetail($event)">View Details</button>
                     </li>
                     <li class="list-inline-item">
-                      <button class="btn btn-primary" id="{{ item.id }}" (click)="addToWishlist($event)">Add to Wishlist</button>
+                      <button class="btn btn-info" id="{{ item.id }}" (click)="addToWishlist($event)">Add to Wishlist <i class="fa fa-heart"></i></button>
                     </li>
                   </ul>
                 </div>

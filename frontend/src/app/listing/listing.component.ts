@@ -72,7 +72,7 @@ export class ListingComponent implements OnInit {
   send() {
     var obj: object = {to: this.sellerId, from: this.userId,senderName: this.userName,
                        senderEmail:this.userEmail,recieverName:this.sellerName,recieverEmail:this.sellerEmail,
-                       text: this.textMessage};
+                       text: this.textMessage,productId: this.id};
     if(this.sellerId == this.userId) {
       alert("Sender and Recipient can't be same");
       return;

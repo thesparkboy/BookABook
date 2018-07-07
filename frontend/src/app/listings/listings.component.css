@@ -1,8 +1,5 @@
 
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
-#team {
-  background: #eee url(http://subtlepatterns.com/patterns/sativa.png) !important;
-}
 
 .btn-primary:hover,
 .btn-primary:focus {
@@ -14,8 +11,6 @@
 
 .btn-primary {
   color: #fff;
-  background-color: #007b5e;
-  border-color: #007b5e;
 }
 
 section {
@@ -25,7 +20,7 @@ section {
 
 section .section-title {
   text-align: center;
-  color: #007b5e;
+  color: #0099ff;
   margin-bottom: 50px;
   text-transform: uppercase;
 }
@@ -120,7 +115,7 @@ section .section-title {
 
 .frontside .card .card-title,
 .backside .card .card-title {
-  color: #007b5e !important;
+  color: #00ccff !important;
 }
 
 .frontside .card .card-body img {
@@ -136,3 +131,6 @@ img {
 .fa-plus {
   color: white;
 }
+
+
+

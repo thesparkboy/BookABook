@@ -3,10 +3,10 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse in" id="navbarTogglerDemo01">
-    <a class="navbar-brand" [routerLink]="['/listings']"><strong>BookaBook</strong></a>
+    <a class="navbar-brand" [routerLink]="['/listings']"><i class="fas fa-book" aria-hidden="true"></i><strong> BookaBook</strong></a>
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0" *ngIf="isLoggedIn">
       <li class="nav-item" [ngClass]="{active : activeMenu === 'listings'}" (click)="setActive('listings')">
-        <a class="nav-link" [routerLink]="['/listings']"><i class="fa fa-book" aria-hidden="true"></i> Listings <span class="sr-only">(current)</span></a>
+        <a class="nav-link" [routerLink]="['/listings']"><i class="fa fa-list-ul" aria-hidden="true"></i> Listings <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item" [ngClass]="{active : activeMenu == 'add'}" (click)="setActive('add')">
         <a class="nav-link" [routerLink]="['/listings/add']"><i class="fa fa-plus-square-o" aria-hidden="true"></i> Add listing</a>
@@ -23,8 +23,8 @@
     </ul>
     <form class="form-inline my-2 my-lg-0" *ngIf="isLoggedIn && !(activeMenu === 'messages') && !(activeMenu === 'add')">
       <input class="form-control mr-sm-2" type="search" placeholder="Search by book or author" aria-label="Search" name="search" [(ngModel)]="currentText" (keyup)="change($event)">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="margin-right: 2rem;">Search</button>
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="margin-right: 1rem;">Search</button>
     </form>
-    <button *ngIf="isLoggedIn" class="btn btn-info" [routerLink]="['/logout']" >Logout</button>
+    <button *ngIf="isLoggedIn" class="btn btn-outline-dark" [routerLink]="['/logout']">Logout</button>
   </div>
 </nav>

@@ -3,6 +3,10 @@ const Sequelize = require('sequelize')
 const db = new Sequelize('bookabook', 'root', 'root', {
     host: 'localhost',
     dialect: 'mysql',
+    dialectOptions: {
+        useUTC: false
+    },
+    timezone: '+05:30',
     pool: {
         min: 0,
         max: 5,
@@ -114,6 +118,9 @@ const Messages = db.define('message', {
     text: {
         type: Sequelize.STRING,
         allowNull: false
+    },
+    productId: {
+        type: Sequelize.INTEGER
     }
 })
 

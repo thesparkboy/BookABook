@@ -1,16 +1,20 @@
 <div class="container">
   <div class="login-container">
     <div id="output"></div>
-    <img class="avatar" src="http://www.emilysbigwalk.org.uk/wp-content/uploads/2017/09/create-your-own-book.png">
+    <img class="avatar" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUeR3inb2aWsUD3dj1sFSRvoQZqU3VyjWuqyO6KTVW9rEz82QO">
     <div class="form-box">
       <form action="" method="">
         <input [(ngModel)]="bookName" name="bookName" type="text" placeholder="Book Name">
         <input [(ngModel)]="author" name="author" type="text" placeholder="Author">
         <input [(ngModel)]="price" name="price" type="text" placeholder="Price">
-        <span>Condition: </span>
-        <select [(ngModel)]="selectedCond" name="conditions" (ngModelChange)="selectedCondition($event)" style="margin-left: 2rem;margin-right: 1rem;"  >
-          <option *ngFor="let c of conditions" [ngValue]="c" selected> {{c}} </option>
-        </select>
+        <div class="form-inline">
+          <label for="conditions" class="col-sm-4 control-label">Condition: </label>
+          <div class="col-sm-7">
+            <select id="conditions" class="form-control" [(ngModel)]="selectedCond" name="conditions" (ngModelChange)="selectedCondition($event)"  >
+              <option *ngFor="let c of conditions" [ngValue]="c" selected> {{c}} </option>
+            </select>
+          </div>
+        </div>
         <div class="file-upload" style="margin-top: 1rem;">
           <div class="file-select">
             <div class="file-select-button" id="fileName">Choose Book Image</div>

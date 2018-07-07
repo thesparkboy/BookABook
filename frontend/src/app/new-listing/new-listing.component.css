@@ -1,4 +1,6 @@
-body{background: #eee url(http://subtlepatterns.com/patterns/sativa.png);}
+
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+
 html,body{
   position: relative;
   height: 100%;
@@ -57,8 +59,6 @@ html,body{
 .avatar{
   width: 140px;height: 140px;
   margin: 10px auto 30px;
-  border-radius: 100%;
-  border: 2px solid #aaa;
   background-size: cover;
 }
 
