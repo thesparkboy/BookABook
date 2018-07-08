@@ -25,9 +25,10 @@ export class ListingComponent implements OnInit {
   sellerName: any;
   textMessage: string = '';
   userName: string = '';
+  authToken: string = this.userIdService.getToken();
 
   headers = new HttpHeaders()
-    .set('Authorization', 'my-auth-token')
+    .set('Authorization', this.authToken)
     .set('Content-Type', 'application/json');
 
   ngOnInit() {

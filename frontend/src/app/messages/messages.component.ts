@@ -26,10 +26,10 @@ export class MessagesComponent implements OnInit {
   reciverName: number;
   reciverEmail: number;
   recieved: boolean = true;
-
+  authToken: string = this.userIdService.getToken();
 
   headers = new HttpHeaders()
-    .set('Authorization', 'my-auth-token')
+    .set('Authorization', this.authToken)
     .set('Content-Type', 'application/json');
 
   ngOnInit() {
@@ -95,7 +95,6 @@ export class MessagesComponent implements OnInit {
   }
 
   product(id) {
-    console.log(id);
     let path = 'listings/' + id;
     this.router.navigate([path]);
   }

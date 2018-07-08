@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {ActivatedRoute, Router} from "@angular/router";
 import {InpTextService} from "../_services/inp-text.service";
+import {UserIdService} from "../_services/user-id.service";
 
 @Component({
   selector: 'app-listings',
@@ -25,13 +26,15 @@ export class ListingsComponent implements OnInit {
   selectedCond: string;
   sortPrice: any;
   sortCondition: any;
+  authToken: string = this.userIdService.getToken();
   // c: string = '';
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private http: HttpClient,
-    private textSerice: InpTextService) {
+    private textSerice: InpTextService,
+    private userIdService: UserIdService) {
 
     this.textSerice.searchText.subscribe(data => {
       this.text = data;
@@ -42,7 +45,7 @@ export class ListingsComponent implements OnInit {
   ngOnInit() {
     this.selectedCond = 'New';
     const headers = new HttpHeaders()
-      .set('Authorization', 'my-auth-token')
+      .set('Authorization', this.authToken)
       .set('Content-Type', 'application/json');
 
     this.http.get('http://localhost:2000/listings', {headers: headers}).subscribe(data => {
@@ -62,7 +65,7 @@ export class ListingsComponent implements OnInit {
     var obj: object = {bookid: bookId,userid: userId};
 
     const headers = new HttpHeaders()
-      .set('Authorization', 'my-auth-token')
+      .set('Authorization', this.authToken)
       .set('Content-Type', 'application/json');
 
     this.http.post('http://localhost:2000/addtowishlist', obj, {

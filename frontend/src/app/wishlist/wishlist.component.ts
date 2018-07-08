@@ -38,10 +38,11 @@ export class WishlistComponent implements OnInit {
   conditionBoxValue: any;
   sortPrice: any;
   sortCondition: any;
+  authToken: string = this.userIdService.getToken();
 
   ngOnInit() {
     const headers = new HttpHeaders()
-      .set('Authorization', 'my-auth-token')
+      .set('Authorization', this.authToken)
       .set('Content-Type', 'application/json');
 
     let userId : number = this.userIdService.getUserId();
@@ -68,7 +69,7 @@ export class WishlistComponent implements OnInit {
     var obj: object = {bookid: bookId,userid: userId};
 
     const headers = new HttpHeaders()
-      .set('Authorization', 'my-auth-token')
+      .set('Authorization', this.authToken)
       .set('Content-Type', 'application/json');
 
     this.http.post('http://localhost:2000/removefromwishlist', obj, {

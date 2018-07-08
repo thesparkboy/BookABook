@@ -18,10 +18,6 @@ export class FileUploadService {
   addProduct(image, id) {
     var formData: any = new FormData();
 
-    const headers = new HttpHeaders()
-      .set('Authorization', 'my-auth-token')
-      .set('Content-Type', 'multipart/form-data');
-
     formData.append('avatar', image);
     this.http.post('http://localhost:2000/upload?id=' + id, formData).subscribe(value =>{
       return 'item uploaded successfully';

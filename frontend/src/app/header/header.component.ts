@@ -24,7 +24,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     if(window.location.pathname == "/listings/add"){
       this.activeMenu = 'add';
-      console.log(window.location.pathname);
     }
     if(window.location.pathname == "/messages"){
       this.activeMenu = 'messages';

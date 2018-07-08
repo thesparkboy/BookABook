@@ -37,10 +37,11 @@ export class MyListingsComponent implements OnInit {
   conditionBoxValue: any;
   sortPrice: any;
   sortCondition: any;
+  authToken: string = this.userIdService.getToken();
 
   ngOnInit() {
     const headers = new HttpHeaders()
-      .set('Authorization', 'my-auth-token')
+      .set('Authorization', this.authToken)
       .set('Content-Type', 'application/json');
 
     let userId : number = this.userIdService.getUserId();
@@ -59,7 +60,7 @@ export class MyListingsComponent implements OnInit {
     var bookId : number = parseInt($event.target.id);
 
     const headers = new HttpHeaders()
-      .set('Authorization', 'my-auth-token')
+      .set('Authorization', this.authToken)
       .set('Content-Type', 'application/json');
 
     this.http.post('http://localhost:2000/removefromlistings', {id: bookId}, {

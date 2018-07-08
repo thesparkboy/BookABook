@@ -21,7 +21,8 @@ export class NewListingComponent implements OnInit {
   obj: object = {};
   valid: boolean = true;
   conditions: string[] = ['New', 'Almost New','Slighlty Damaged', 'Worn'];
-  chosenFileName: string = 'No File Chosen...'
+  chosenFileName: string = 'No File Chosen...';
+  authToken: string = this.userIdService.getToken();
 
   constructor(private http: HttpClient,private userIdService: UserIdService,private fileUploadService: FileUploadService) { }
 
@@ -41,7 +42,7 @@ export class NewListingComponent implements OnInit {
     }
 
     const headers = new HttpHeaders()
-      .set('Authorization', 'my-auth-token')
+      .set('Authorization', this.authToken)
       .set('Content-Type', 'application/json');
 
     if(this.bookName.length == 0){
