@@ -48,7 +48,7 @@ export class ListingsComponent implements OnInit {
       .set('Authorization', this.authToken)
       .set('Content-Type', 'application/json');
 
-    this.http.get('http://localhost:2000/listings', {headers: headers}).subscribe(data => {
+    this.http.get('/listings', {headers: headers}).subscribe(data => {
       this.items = data;
     })
   }
@@ -68,7 +68,7 @@ export class ListingsComponent implements OnInit {
       .set('Authorization', this.authToken)
       .set('Content-Type', 'application/json');
 
-    this.http.post('http://localhost:2000/addtowishlist', obj, {
+    this.http.post('/addtowishlist', obj, {
       headers: headers
     }).subscribe(data => {
       if(data['status'] == 'success') {

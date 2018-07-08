@@ -45,7 +45,7 @@ export class MyListingsComponent implements OnInit {
       .set('Content-Type', 'application/json');
 
     let userId : number = this.userIdService.getUserId();
-    this.http.get('http://localhost:2000/mylistings/' + userId, {headers: headers}).subscribe(data => {
+    this.http.get('/mylistings/' + userId, {headers: headers}).subscribe(data => {
       this.items = data;
     })
   }
@@ -63,7 +63,7 @@ export class MyListingsComponent implements OnInit {
       .set('Authorization', this.authToken)
       .set('Content-Type', 'application/json');
 
-    this.http.post('http://localhost:2000/removefromlistings', {id: bookId}, {
+    this.http.post('/removefromlistings', {id: bookId}, {
       headers: headers
     }).subscribe(data => {
       // console.log(data);

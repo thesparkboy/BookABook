@@ -19,7 +19,7 @@ export class FileUploadService {
     var formData: any = new FormData();
 
     formData.append('avatar', image);
-    this.http.post('http://localhost:2000/upload?id=' + id, formData).subscribe(value =>{
+    this.http.post('/upload?id=' + id, formData).subscribe(value =>{
       return 'item uploaded successfully';
     });
   }

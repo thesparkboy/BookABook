@@ -28,14 +28,14 @@ export class NewMessageComponent implements OnInit {
 
   ngOnInit() {
     this.userId = this.userIdService.getUserId();
-    this.http.get('http://localhost:2000/message/' + this.userId, {headers: this.headers}).subscribe(data => {
+    this.http.get('/message/' + this.userId, {headers: this.headers}).subscribe(data => {
       this.messages = data;
       for(let message of this.messages) {
         this.allIds.push(message.from);
       }
       this.unique = this.allIds.filter((v, i, a) => a.indexOf(v) === i);
     })
-    this.http.get('http://localhost:2000/message/sent/' + this.userId, {headers: this.headers}).subscribe(data => {
+    this.http.get('/message/sent/' + this.userId, {headers: this.headers}).subscribe(data => {
       this.messages = data;
       for(let message of this.messages) {
         this.allIds.push(message.to);

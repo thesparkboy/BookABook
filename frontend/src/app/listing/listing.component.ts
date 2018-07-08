@@ -37,17 +37,17 @@ export class ListingComponent implements OnInit {
       this.id = params['id'];
     });
 
-    this.http.get('http://localhost:2000/listings/' + this.id, {headers: this.headers}).subscribe(data => {
+    this.http.get('/listings/' + this.id, {headers: this.headers}).subscribe(data => {
       this.item = data;
       this.userId = this.userIdService.getUserId();
       this.sellerId = this.item.seller;
 
-      this.http.get('http://localhost:2000/details/' + this.userId, {headers: this.headers}).subscribe(userDetails => {
+      this.http.get('/details/' + this.userId, {headers: this.headers}).subscribe(userDetails => {
         this.userEmail = userDetails['email'];
         this.userName = userDetails['name'];
       })
 
-      this.http.get('http://localhost:2000/details/' + this.sellerId, {headers: this.headers}).subscribe(sellerDetails => {
+      this.http.get('/details/' + this.sellerId, {headers: this.headers}).subscribe(sellerDetails => {
         this.sellerEmail = sellerDetails['email'];
         this.sellerName = sellerDetails['name'];
       })
@@ -61,7 +61,7 @@ export class ListingComponent implements OnInit {
     var userId: number = parseInt(localStorage.getItem('userId'));
     var obj: object = {bookid: bookId, userid: userId};
 
-    this.http.post('http://localhost:2000/addtowishlist', obj, {
+    this.http.post('/addtowishlist', obj, {
       headers: this.headers
     }).subscribe(data => {
       if(data['status'] == 'success') {
@@ -78,7 +78,7 @@ export class ListingComponent implements OnInit {
       alert("Sender and Recipient can't be same");
       return;
     }
-    this.http.post('http://localhost:2000/message', obj, {
+    this.http.post('/message', obj, {
       headers: this.headers
     }).subscribe(data => {
       if(data['status'] == 'success') {

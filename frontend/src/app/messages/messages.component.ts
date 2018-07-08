@@ -36,12 +36,12 @@ export class MessagesComponent implements OnInit {
 
     this.recieved = true;
     this.userId = this.userIdService.getUserId();
-    this.http.get('http://localhost:2000/message/' + this.userId, {headers: this.headers}).subscribe(data => {
+    this.http.get('/message/' + this.userId, {headers: this.headers}).subscribe(data => {
       this.messages = data;
       this.messages.reverse();
     })
 
-    this.http.get('http://localhost:2000/details/' + this.userId, {headers: this.headers}).subscribe(userDetails => {
+    this.http.get('/details/' + this.userId, {headers: this.headers}).subscribe(userDetails => {
       this.userEmail = userDetails['email'];
       this.userName = userDetails['name'];
     })
@@ -51,7 +51,7 @@ export class MessagesComponent implements OnInit {
   send(objct) {
     this.reciverId = parseInt(objct.event.target.id);
     let productId = objct.id;
-    this.http.get('http://localhost:2000/details/' + this.reciverId, {headers: this.headers}).subscribe(data => {
+    this.http.get('/details/' + this.reciverId, {headers: this.headers}).subscribe(data => {
       this.reciverName = data['name'];
       this.reciverEmail = data['email'];
 
@@ -64,7 +64,7 @@ export class MessagesComponent implements OnInit {
         return;
       }
 
-      this.http.post('http://localhost:2000/message', obj, {
+      this.http.post('/message', obj, {
         headers: this.headers
       }).subscribe(data => {
         if(data['status'] == 'success') {
@@ -76,7 +76,7 @@ export class MessagesComponent implements OnInit {
 
   sent() {
     this.recieved = false;
-    this.http.get('http://localhost:2000/message/sent/' + this.userId, {
+    this.http.get('/message/sent/' + this.userId, {
       headers: this.headers
     }).subscribe(data => {
       this.messages = data;
@@ -85,7 +85,7 @@ export class MessagesComponent implements OnInit {
   }
 
   delete(id) {
-    this.http.post('http://localhost:2000/message/delete', {id: id}, {
+    this.http.post('/message/delete', {id: id}, {
       headers: this.headers
     }).subscribe(data => {
       if(data['status'] == 'success') {

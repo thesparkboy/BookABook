@@ -10,7 +10,7 @@
         <div class="form-inline">
           <label for="conditions" class="col-sm-4 control-label">Condition: </label>
           <div class="col-sm-7">
-            <select id="conditions" class="form-control" [(ngModel)]="selectedCond" name="conditions" (ngModelChange)="selectedCondition($event)"  >
+            <select id="conditions" class="form-control" name="conditions" (ngModelChange)="selectedCondition($event)"  >
               <option *ngFor="let c of conditions" [ngValue]="c" selected> {{c}} </option>
             </select>
           </div>

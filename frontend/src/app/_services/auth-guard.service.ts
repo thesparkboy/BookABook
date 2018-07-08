@@ -21,7 +21,7 @@ export class AuthGuardService implements CanActivate{
     const userId = localStorage.getItem('userId');
 
     let promise = new Promise((resolve, reject) => {
-      this.http.get('http://localhost:2000/gettoken/' + userId).subscribe((data) => {
+      this.http.get('/gettoken/' + userId).subscribe((data) => {
         if(data['check'] == 'valid' && token == data['token']) {
           this.isLoggendIn.emit(true);
           resolve(true);

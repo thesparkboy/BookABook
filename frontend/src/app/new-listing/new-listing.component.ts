@@ -63,7 +63,7 @@ export class NewListingComponent implements OnInit {
     }
 
     if (this.valid) {
-        this.http.post('http://localhost:2000/listings/add', this.obj, {
+        this.http.post('/listings/add', this.obj, {
           headers: headers
         }).subscribe(data => {
            // console.log(data);

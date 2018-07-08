@@ -46,11 +46,11 @@ export class WishlistComponent implements OnInit {
       .set('Content-Type', 'application/json');
 
     let userId : number = this.userIdService.getUserId();
-    this.http.get('http://localhost:2000/wishlist/' + userId, {headers: headers}).subscribe(data => {
+    this.http.get('/wishlist/' + userId, {headers: headers}).subscribe(data => {
       this.wihslists = data;
       for(let wishlist of this.wihslists) {
         let bookid = wishlist.bookid;
-        this.http.get('http://localhost:2000/listings/' + bookid, {headers: headers}).subscribe(data => {
+        this.http.get('/listings/' + bookid, {headers: headers}).subscribe(data => {
           this.items.push(data);
         })
       }
@@ -72,7 +72,7 @@ export class WishlistComponent implements OnInit {
       .set('Authorization', this.authToken)
       .set('Content-Type', 'application/json');
 
-    this.http.post('http://localhost:2000/removefromwishlist', obj, {
+    this.http.post('/removefromwishlist', obj, {
       headers: headers
     }).subscribe(data => {
       console.log(data);

@@ -39,7 +39,7 @@ export class LoginSignupComponent implements OnInit {
       .set('Authorization', 'my-auth-token')
       .set('Content-Type', 'application/json');
 
-    this.http.post('http://localhost:2000/login', obj, {
+    this.http.post('/login', obj, {
       headers: headers
     }).subscribe(data => {
       if(data){
@@ -84,7 +84,7 @@ export class LoginSignupComponent implements OnInit {
     }
 
     if(this.valid) {
-      this.http.post('http://localhost:2000/signup', obj, {
+      this.http.post('/signup', obj, {
         headers: headers
       }).subscribe(data => {
         // console.log('==========');
@@ -104,7 +104,7 @@ export class LoginSignupComponent implements OnInit {
 
   afuConfig = {
     uploadAPI: {
-      url:"http://localhost:2000/upload"
+      url:"/upload"
     }
   };
 }

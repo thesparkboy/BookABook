@@ -25,4 +25,4 @@ const appRoutes: Routes = [
   { path: '**', redirectTo: '/listings' }
 ];
 
-export const routing = RouterModule.forRoot(appRoutes);
+export const routing = RouterModule.forRoot(appRoutes,{ useHash: true });
