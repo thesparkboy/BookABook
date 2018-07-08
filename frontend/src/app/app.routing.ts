@@ -9,9 +9,10 @@ import {TestComponentComponent} from "./test-component/test-component.component"
 import {LoginSignupComponent} from "./login-signup/login-signup.component";
 import {MyListingsComponent} from "./my-listings/my-listings.component";
 import {MessagesComponent} from "./messages/messages.component";
+import {NewMessageComponent} from "./new-message/new-message.component";
 
 const appRoutes: Routes = [
-  { path: '', component: ListingComponent, canActivate: [AuthGuard]},
+  { path: '', redirectTo:'/listings',pathMatch: 'full', canActivate: [AuthGuard]},
   { path: 'login', component: LoginSignupComponent},
   { path: 'logout', component: LoginSignupComponent, canActivate: [AuthGuard]},
   { path: 'listings', component: ListingsComponent, canActivate: [AuthGuard]},
@@ -20,7 +21,7 @@ const appRoutes: Routes = [
   { path: 'wishlist', component: WishlistComponent, canActivate: [AuthGuard]},
   { path: 'mylistings', component: MyListingsComponent, canActivate: [AuthGuard]},
   { path: 'messages', component: MessagesComponent, canActivate: [AuthGuard]},
-  { path: 'test', component: TestComponentComponent},
+  { path: 'test', component: NewMessageComponent},
   { path: '**', redirectTo: '/listings' }
 ];
 

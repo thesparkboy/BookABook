@@ -8,6 +8,7 @@ const express = require('express'),
       bodyParser = require('body-parser'),
       multer  = require('multer'),
       upload = multer({dest: 'public/'});
+      Sequelize = require('sequelize')
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -263,6 +264,21 @@ app.post('/upload', upload.any() ,(req, res) => {
         })
     }
     res.send('');
+});
+
+app.get('/allmessages/:id', (req, res) => {
+    Messages.findAll({
+        where : Sequelize.or(
+            {to: req.params.id},
+            {from: req.params.id},
+        ),
+        attributes: ['to'],
+        distict: true
+    }).then((messages) => {
+        res.send(messages);
+    }).catch((error) => {
+        res.send({error})
+    })
 });
 
 app.listen(2000, function () {

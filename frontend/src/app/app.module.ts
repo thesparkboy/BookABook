@@ -24,6 +24,7 @@ import { HeaderComponent } from './header/header.component';
 import { InpTextService } from "./_services/inp-text.service";
 import { MyListingsComponent } from './my-listings/my-listings.component';
 import { MessagesComponent } from './messages/messages.component';
+import { NewMessageComponent } from './new-message/new-message.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { MessagesComponent } from './messages/messages.component';
     LoginSignupComponent,
     HeaderComponent,
     MyListingsComponent,
-    MessagesComponent
+    MessagesComponent,
+    NewMessageComponent
   ],
   imports: [
     BrowserModule,
